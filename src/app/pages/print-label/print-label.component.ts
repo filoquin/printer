@@ -116,7 +116,7 @@ export class PrintLabelComponent implements OnInit {
   addCode() {
     const search = this.searchForm.controls.search.value;
 
-    
+
     this.productService.searchByCode(search).subscribe((res) => {
       if (res["length"] > 0) {
         this.product = res["records"][0];
@@ -144,6 +144,7 @@ export class PrintLabelComponent implements OnInit {
   }
   setPriceList(pricelist_id) {
     this.selected_pricelist_id = pricelist_id;
+    this.product.prices = [];
     this.load_price(this.product.id);
   }
   testPrint() {

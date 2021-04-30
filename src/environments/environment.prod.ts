@@ -4,8 +4,8 @@
 
 export const environment = {
   production: true,
-  odoo_server: "https://www.casagoro.com.ar",
-  db: 'www.casagoro.com.ar',
+  odoo_server: "https://www.blancoamor.com",
+  db: 'odoo',
   password:"",
   user: "",
 };

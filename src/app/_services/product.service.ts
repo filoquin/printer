@@ -10,12 +10,12 @@ export class ProductService {
 
   searchByCode(code) {
     const transaction$ = new Observable((observer) => {
-      const leaf = ["|", ["default_code", "=", code], ["barcode", "=", code]];
+      const leaf = ["|", ["default_code", "=", code], ["ean13", "=", code]];
       this.odooRPC
         .searchRead(
           "product.product",
           leaf,
-          ["name", "default_code", "description"],
+          ["name", "ean13", "description"],
           1
         )
         .then((res) => {
@@ -78,7 +78,7 @@ export class ProductService {
       this.odooRPC
         .searchRead(
           "product.pricelist",
-          [["selectable", "=", true]],
+          [["type", "=", "sale"]],
           ["name"]
         )
         .then((res) => {

@@ -1,7 +1,7 @@
 {
     "\/odoo": {
-        "target": "https://www.casagoro.com.ar/",
-        "secure": false,
+        "target": "https://www.blancoamor.com/",
+        "secure": true,
         "changeOrigin": true,
         "pathRewrite": {
              "^\/odoo/": "/"

@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   odoo_server: "/odoo",
-  db: 'www.casagoro.com.ar',
+  db: 'odoo',
   password:"",
   user: "",
 };
