@@ -14,7 +14,8 @@ export class ConfigService {
     labelWidth:300,
     labelHeight:250,
     PrinterName: '',
-    priceChageDate: '',
+    priceChageDate:  "2021-06-24 00:00:00",
+
   });
 
   constructor() {

@@ -15,7 +15,7 @@ export class ProductService {
         .searchRead(
           "product.product",
           leaf,
-          ["name", "display_name", "ean13", "description"],
+          ["name", "display_name", "default_code", "ean13", "description"],
           1,0,{"lang": "es_AR", 'display_default_code': false}
         )
         .then((res) => {
@@ -40,8 +40,9 @@ export class ProductService {
         .then((res) => {
           for (let list in pricelist_ids) {
             observer.next({
+              id: pricelist_ids[list].id,
               name: pricelist_ids[list].name,
-              price: res[pricelist_ids[list].id],
+              price: res[pricelist_ids[list].id] * 1.21,
             });
           }
 
@@ -78,7 +79,7 @@ export class ProductService {
       this.odooRPC
         .searchRead(
           "product.pricelist",
-          [["type", "=", "sale"]],
+          [["type", "=", "sale"], ['currency_id.name', '=', 'ARS']],
           ["name"]
         )
         .then((res) => {

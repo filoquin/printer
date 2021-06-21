@@ -17,6 +17,9 @@ export class PriceLabelComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  filter_price(pricelist, list){
+    return pricelist.filter(v => v['id'] >= list);
+  }
   print(){
   	this.printLabel.emit();
   }

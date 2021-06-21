@@ -28,7 +28,7 @@ export class PrintConfigComponent implements OnInit {
 	printer_status: boolean;
 	test_text: string = "texto de prueba";
 	status_text = '';
-	priceChageDate: string = "2021-05-14 00:00:00";
+	priceChageDate: string = "2021-06-24 00:00:00";
 
 	configForm: FormGroup;
 
@@ -66,6 +66,7 @@ export class PrintConfigComponent implements OnInit {
     params['PrinterName'] = this.configForm.controls.PrinterName.value;
     params['priceChageDate'] = this.configForm.controls.priceChageDate.value;
     this.ConfigService.saveConfig(params);
+    alert('Configuracion Lista');
   }
 
 	searchPrinters() {

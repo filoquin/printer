@@ -49,7 +49,6 @@ export class OdooRPCService {
         if (this.shouldManageSessionId) {
             params.session_id = this.cookies.get_sessionId();
         }
-        params['cids'] = 1
         this.headers = new HttpHeaders({
             "Content-Type": "application/json",
             //"X-Openerp-Session-Id": this.cookies.get_sessionId(),

@@ -25,6 +25,7 @@ import { ProductPricesComponent } from './main/elements/product-prices/product-p
 import { OmniBarcodeComponent } from './main/elements/omni-barcode/omni-barcode.component';
 import { LeftPadFilterPipe } from './_helpers/left-pad-filter.pipe';
 import { PriceUpdateComponent } from './pages/price-update/price-update.component';
+import { FilterPricePipe } from './_helpers/filter-price.pipe';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { PriceUpdateComponent } from './pages/price-update/price-update.componen
     ProductPricesComponent,
     OmniBarcodeComponent,
     LeftPadFilterPipe,
-    PriceUpdateComponent
+    PriceUpdateComponent,
+    FilterPricePipe
   ],
   imports: [
     BrowserModule,

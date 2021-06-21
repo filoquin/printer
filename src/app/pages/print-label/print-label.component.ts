@@ -244,7 +244,7 @@ export class PrintLabelComponent implements OnInit {
       this.searchElement.nativeElement.focus();
     }
     if (!environment.production) {
-      this.barcodeProvider.test();
+      //this.barcodeProvider.test();
     }
 
 
@@ -331,6 +331,7 @@ export class PrintLabelComponent implements OnInit {
         parent.product = res["records"][0];
         parent.log = parent.log + res["records"][0]["name"] + "|";
         parent.product['prices'] = [];
+        parent.product['prices_dict'] = {};
         parent.load_price(res["records"][0]["id"]);
       } else {
         alert("Codigo invalido");
@@ -349,6 +350,7 @@ export class PrintLabelComponent implements OnInit {
         next(price) {
           parent.log = parent.log + JSON.stringify(price) + "|";
           parent.product["prices"].push(price);
+          parent.product['prices_dict'][price['id']] = price['price']
         },
         complete() {
           parent.spinner = false;

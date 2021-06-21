@@ -26,7 +26,7 @@ export class PriceUpdateComponent implements OnInit {
 	spinner: boolean = false;
 	log: string = "";
 	showLog: boolean = false;
-	priceChageDate: string = "2021-05-14 00:00:00";
+	priceChageDate: string = "2021-06-24 00:00:00";
 	//priceChageDate: string = "14/05/2021 00:00:00";
 
 	constructor(
@@ -71,14 +71,17 @@ export class PriceUpdateComponent implements OnInit {
 
 	getPricechanges(date) {
 		let parent = this;
+		this.spinner = true;
+		this.product = false;
+
 		this.PriceChangesService.getPriceHistory(date).subscribe({
 			next(res) {
 				parent.product_ids = res["records"].map(item => item).filter(
-					(value, index, self) => self.indexOf({product_tmpl_id: value.product_tmpl_id}) == -1);
+					(value, index, self) => self.indexOf({product_template_id: value.product_template_id}) == -1);
 			},
 
 			complete() {
-				console.log(parent.product_ids);
+				parent.spinner = false;
 			},
 		});
 	}
@@ -96,10 +99,11 @@ export class PriceUpdateComponent implements OnInit {
 		this.product = false;
 		this.spinner = true;
 		//this.changeDetectorRef.detectChanges();
-		this.productService.searchByTmplId(line['product_tmpl_id'][0]).subscribe((res) => {
+		this.productService.searchByTmplId(line['product_template_id'][0]).subscribe((res) => {
 			if (res["length"] > 0) {
 				parent.product = res["records"][0];
 				parent.product["prices"] = [];
+                parent.product['prices_dict'] = {};
 				parent.load_price(res["records"][0]["id"],line);
 
 			} else {
@@ -116,6 +120,7 @@ export class PriceUpdateComponent implements OnInit {
 			.subscribe({
 				next(price) {
 					parent.product["prices"].push(price);
+			        parent.product['prices_dict'][price['id']] = price['price']
 				},
 				complete() {
 					parent.spinner = false;

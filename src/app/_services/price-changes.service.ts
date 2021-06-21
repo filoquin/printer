@@ -12,13 +12,12 @@ export class PriceChangesService {
   getPriceHistory(fromDate, location_ids=[]) {
     const transaction$ = new Observable((observer) => {
       const leaf = [['datetime', '>=',fromDate]];
-
       this.odooRPC
         .searchRead(
-          "product.sale.price.history",
+          "watching.products.price.changes",
           leaf,
-          ['product_tmpl_id','datetime'],
-          0,0,{"lang": "es_AR", 'display_default_code': false}, 'datetime asc'
+          ['product_template_id','datetime', 'list_price'],
+          300,0,{"lang": "es_AR"}, 'datetime asc'
         )
         .then((res) => {
           observer.next(res);

@@ -1,6 +1,6 @@
 <div class="row text-center mt-2 ">
   <div class="col-12">
-    <div [style.height.px]="ConfigService.params.labelHeight"  style="background: #eee; ">
+    <div [style.height.px]="ConfigService.params.labelHeight" style="background: #eee; ">
       <app-price-label #etiqueta (click)="printTag()" [product]="product"></app-price-label>
     </div>
   </div>
@@ -18,29 +18,16 @@
     </button>
   </div>
 </div>
-<div class="form-group row">
- <div class="col-12">
-
-        <div class="input-group">
-    <input class="form-control" type="text" (ngModelChange)="changeDate($event)" [ngModel]="priceChageDate" id="priceChageDate">
-        <span class="input-group-append">
-          <button class="btn btn-primary" (click)="getPricechanges(priceChageDate)" type="button">
-            <i class="fa fa-search"></i>
-          </button>   
-        </span>
-      </div>
-
-
-  </div>
-</div>
-<div class="row mt-2"  >
+<div class="row mt-2">
   <div class="col-12">
-    <ul class="list-group">
-	<ng-container *ngFor="let product_id of product_ids">
-      <li class="list-group-item" *ngIf="product_id['printed'] !=true" (click)="searchByTmplId(product_id)" >{{ product_id['product_tmpl_id'][1] }}
-      	{{ product_id['datetime'] | date: "d/M/Y H:mm":"UTC -6"}}
-      </li>
-	  </ng-container>
+    <ul class="list-group h-50 overflow-auto">
+      <ng-container *ngFor="let product_id of product_ids">
+        <li class="list-group-item" *ngIf="product_id['printed'] !=true" (click)="searchByTmplId(product_id)"><strong>{{ product_id['product_template_id'][1] }}</strong>
+          $ {{ product_id['list_price'] | number : '1.0-0'}}
+          <br />
+          <div class="text-right"><i>{{ product_id['datetime'] | date: "d/M/Y H:mm":"UTC -6"}} </i></div>
+        </li>
+      </ng-container>
     </ul>
   </div>
 </div>
@@ -53,18 +40,20 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <!--div class="modal-body">
-        <ul class="list-group">
-          <li class="list-group-item" (click)="setPriceList(pricelist_ids)">
-            <input class="form-check-input me-1" type="checkbox" [checked]="pricelist_ids == selected_pricelist_id" aria-label="todas">
-            Todas
-          </li>
-          <li *ngFor="let pricelist_id of pricelist_ids" (click)="setPriceList(pricelist_id)" class="list-group-item">
-            <input class="form-check-input me-1" type="checkbox" [checked]="pricelist_id == selected_pricelist_id">
-            {{pricelist_id.name}}
-          </li>
-        </ul>
-      </div-->
+      <div class="modal-body">
+        <div class="form-group row">
+          <div class="col-12">
+            <div class="input-group">
+              <input class="form-control" type="text" (ngModelChange)="changeDate($event)" [ngModel]="priceChageDate" id="priceChageDate">
+              <span class="input-group-append">
+                <button class="btn btn-primary" (click)="getPricechanges(priceChageDate)" type="button">
+                  <i class="fa fa-search"></i>
+                </button>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
