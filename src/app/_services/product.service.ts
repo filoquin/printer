@@ -15,8 +15,8 @@ export class ProductService {
         .searchRead(
           "product.product",
           leaf,
-          ["name", "ean13", "description"],
-          1
+          ["name", "display_name", "ean13", "description"],
+          1,0,{"lang": "es_AR", 'display_default_code': false}
         )
         .then((res) => {
           observer.next(res);
@@ -91,8 +91,27 @@ export class ProductService {
     });
     return transaction$;
   } 
-}
+  searchByTmplId(id) {
+    const transaction$ = new Observable((observer) => {
+      this.odooRPC
+        .searchRead(
+          "product.product",
+          [['product_tmpl_id', '=', id]],
+          ["name", "display_name", "default_code", "description","barcode","modelo_articulo",'second_price'],
+          1,0,{"lang": "es_AR", 'display_default_code': false}
+        )
+        .then((res) => {
+          observer.next(res);
+          observer.complete();
+        })
+        .catch((err) => {
+          alert(err);
+        });
+    });
+    return transaction$;
+  }
 
+}
 /*  getDetail(item) {
     if (item.detailed) {
       item.detailed = false;

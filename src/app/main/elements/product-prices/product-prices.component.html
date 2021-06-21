@@ -1,0 +1,7 @@
+<div class="row text-center mt-2">
+  <div class="col-12">
+    <ul class="list-group" *ngIf="product &&  product['prices']">
+      <li class="list-group-item" *ngFor="let price of product['prices']">{{ price.name }} $ {{ price.price | number : '1.2' }}</li>
+    </ul>
+  </div>
+</div >

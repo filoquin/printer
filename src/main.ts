@@ -12,9 +12,13 @@ if (environment.production) {
 
 let onDeviceReady = () => {
   platformBrowserDynamic().bootstrapModule(AppModule);
+  document.addEventListener("resume", onResume, false);
 
 };
 //platformBrowserDynamic().bootstrapModule(AppModule);
 
 document.addEventListener('deviceready', onDeviceReady, false);
 
+function onResume() {
+	//alert('resume');
+}

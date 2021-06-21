@@ -49,7 +49,7 @@ export class OdooRPCService {
         if (this.shouldManageSessionId) {
             params.session_id = this.cookies.get_sessionId();
         }
-    
+        params['cids'] = 1
         this.headers = new HttpHeaders({
             "Content-Type": "application/json",
             //"X-Openerp-Session-Id": this.cookies.get_sessionId(),
@@ -221,9 +221,9 @@ export class OdooRPCService {
             offset: offset,
             context: context || this.context
         };
-        /*if (order){
-            params['order'] = order;
-        }*/
+        if (order){
+            params['sort'] = order;
+        }
         return this.sendRequest("/web/dataset/search_read", params);
     }
 
@@ -235,7 +235,7 @@ export class OdooRPCService {
         if (Number.isInteger(id)){
             id = [id];
         }
-        return this.call(model, 'read',[id],     params);
+        return this.call(model, 'read',[id],params);
     }
 
     public updateContext(context: any) {

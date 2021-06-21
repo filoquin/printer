@@ -1,7 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 declare let BTPrinter: any;
 import { PrinterService } from "../../_services/printer.service";
+import { ConfigService } from "../../_services/config.service";
 import { environment } from "../../../environments/environment";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 @Component({
 	selector: "app-print-config",
@@ -20,19 +22,51 @@ export class PrintConfigComponent implements OnInit {
 		"MAC 3",
 		0,
 	];
-
+	scanMethods:any =["textBus",'form'];
 	printers: any = [];
 	selected_printer: string;
 	printer_status: boolean;
 	test_text: string = "texto de prueba";
 	status_text = '';
+	priceChageDate: string = "2021-05-14 00:00:00";
 
-	constructor(public PrinterService: PrinterService) {}
+	configForm: FormGroup;
+
+	constructor(
+		public PrinterService: PrinterService, 
+		public ConfigService: ConfigService,    
+		private formBuilder: FormBuilder) {}
 
 	ngOnInit(): void {
 		this.selected_printer = this.PrinterService.selected_printer;
 		this.connected(false);
+	    this.configForm = this.formBuilder.group({
+	      printAuto: [this.ConfigService.params.printAuto],
+	      printAutoDelay: [this.ConfigService.params.printAutoDelay],
+	      labelWidth: [this.ConfigService.params.labelWidth],
+	      labelHeight: [this.ConfigService.params.labelHeight],
+	      scanMethod: [this.ConfigService.params.scanMethod],
+	      showLog: [this.ConfigService.params.showLog],
+	      PrinterName: [this.ConfigService.params.PrinterName],
+	      priceChageDate: ["2021-05-14 00:00:00"],
+
+
+	    });
+
+
 	}
+  saveConfig() {
+  	let params = {}
+    params['printAuto'] = this.configForm.controls.printAuto.value;
+    params['printAutoDelay'] = this.configForm.controls.printAutoDelay.value;
+    params['labelWidth'] = this.configForm.controls.labelWidth.value;
+    params['labelHeight'] = this.configForm.controls.labelHeight.value;
+    params['scanMethod'] = this.configForm.controls.scanMethod.value;
+    params['showLog'] = this.configForm.controls.showLog.value;
+    params['PrinterName'] = this.configForm.controls.PrinterName.value;
+    params['priceChageDate'] = this.configForm.controls.priceChageDate.value;
+    this.ConfigService.saveConfig(params);
+  }
 
 	searchPrinters() {
 		this.printers = [];
@@ -47,11 +81,15 @@ export class PrintConfigComponent implements OnInit {
 		}
 	}
 	connectPrinter(PrinterName) {
+		let parent = this;
 		this.PrinterService.connectPrinter(PrinterName).subscribe(
 			(res: any) => {
+				parent.ConfigService.params.PrinterName = PrinterName;
+				parent.ConfigService.saveConfig(this.ConfigService.params);
+
 				alert(res);
-				this.printer_status = true;
-				this.selected_printer = PrinterName;
+				parent.printer_status = true;
+				parent.selected_printer = PrinterName;
 			}
 		);
 	}

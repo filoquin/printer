@@ -18,14 +18,14 @@
       <form [formGroup]="authForm" class="login-container" (ngSubmit)="signIn()">
 
         <div class="form-group" [ngClass]="{ 'has-error': isSubmitted && formControls.email.errors }">
-          <label for="exampleInputEmail1" class="text-white">Usuario</label>
+          <label for="exampleInputEmail1" >Usuario</label>
           <input type="email" class="form-control input-custom" id="exampleInputEmail1" aria-describedby="emailHelp"  formControlName="email">
           <div *ngIf="isSubmitted && formControls.email.errors" class="help-block text-white font-italic">
             <div *ngIf="formControls.email.errors.required"><strong>*</strong>Debe ingresar un usuario</div>
           </div>
         </div>
         <div class="form-group"  [ngClass]="{ 'has-error': isSubmitted && formControls.password.errors }">
-          <label for="exampleInputPassword1" class="text-white">Contraseña</label>
+          <label for="exampleInputPassword1" >Contraseña</label>
           <input type="password" class="form-control input-custom" id="exampleInputPassword1" formControlName="password">
           <div *ngIf="isSubmitted && formControls.password.errors" class="help-block text-white font-italic">
             <div *ngIf="formControls.password.errors.required"><strong>*</strong>Debe ingresar una clave</div>

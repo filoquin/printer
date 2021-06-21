@@ -30,6 +30,7 @@
     "cordova-plugin-advanced-http": "^3.1.0",
     "cordova-plugin-btprinter": "git+https://github.com/CesarBalzer/Cordova-Plugin-BTPrinter.git",
     "cordova-plugin-file": "^6.0.2",
+    "font-awesome": "^4.7.0",
     "html2canvas": "^1.0.0-rc.7",
     "jquery": "^3.5.1",
     "rxjs": "~6.6.0",

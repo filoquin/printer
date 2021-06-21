@@ -1,19 +1,8 @@
-<div class="row text-center mt-2">
+<div class="row text-center mt-2 ">
   <div class="col-12">
     <div [style.height.px]="ConfigService.params.labelHeight"  style="background: #eee; ">
       <app-price-label #etiqueta (click)="printTag()" [product]="product"></app-price-label>
     </div>
-    <div *ngIf="this.inputMethod == 'textBus'" class="text-center"><strong>{{textBus}}</strong></div>
-    <form [formGroup]="searchForm" *ngIf="this.inputMethod == 'form'">
-      <div class="input-group input-group-lg">
-        <input type="text" autofocus #search class="form-control" id="bus" formControlName="search" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
-        <span class="input-group-append">
-          <button class="btn btn-primary btn-lg" (click)="formSearch()" type="button">
-            <i class="fa fa-search"></i>
-          </button>
-        </span>
-      </div>
-    </form>
   </div>
 </div>
 <div class="text-center spinnerContent">
@@ -21,19 +10,40 @@
     <span class="sr-only">Loading...</span>
   </div>
 </div>
-<app-product-prices [product]="product"></app-product-prices>
 <div class="row text-center ">
   <div class="btn-group btn-group-lg fixed-bottom" role="group">
-    <button type="button btn-block" (click)="inputMethod = 'form'" [ngClass]="{'btn': true, 'btn-secondary': true, 'active': inputMethod == 'form'}"><i class="fa fa-font"></i></button>
-    <button type="button btn-block" (click)="inputMethod = 'textBus'" [ngClass]="{'btn': true, 'btn-secondary': true, 'active': inputMethod == 'textBus'}"><i class="fa fa-barcode"></i></button>
     <button type="button btn-block" (click)="toglePrintAuto()" [ngClass]="{'btn': true, 'btn-secondary': true, 'active': printAuto}"><i class="fa fa-print"></i>
     </button>
     <button type="button btn-block" data-toggle="modal" data-target="#pricelistModal" [ngClass]="{'btn': true, 'btn-secondary': true}"><i class="fa fa-list"></i>
     </button>
   </div>
 </div>
-<textarea *ngIf="showLog" style="width:100%;">{{ log }}</textarea>
+<div class="form-group row">
+ <div class="col-12">
 
+        <div class="input-group">
+    <input class="form-control" type="text" (ngModelChange)="changeDate($event)" [ngModel]="priceChageDate" id="priceChageDate">
+        <span class="input-group-append">
+          <button class="btn btn-primary" (click)="getPricechanges(priceChageDate)" type="button">
+            <i class="fa fa-search"></i>
+          </button>   
+        </span>
+      </div>
+
+
+  </div>
+</div>
+<div class="row mt-2"  >
+  <div class="col-12">
+    <ul class="list-group">
+	<ng-container *ngFor="let product_id of product_ids">
+      <li class="list-group-item" *ngIf="product_id['printed'] !=true" (click)="searchByTmplId(product_id)" >{{ product_id['product_tmpl_id'][1] }}
+      	{{ product_id['datetime'] | date: "d/M/Y H:mm":"UTC -6"}}
+      </li>
+	  </ng-container>
+    </ul>
+  </div>
+</div>
 <div class="modal fade" id="pricelistModal" tabindex="-1" role="dialog" aria-labelledby="pricelistModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -43,7 +53,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <!--div class="modal-body">
         <ul class="list-group">
           <li class="list-group-item" (click)="setPriceList(pricelist_ids)">
             <input class="form-check-input me-1" type="checkbox" [checked]="pricelist_ids == selected_pricelist_id" aria-label="todas">
@@ -54,7 +64,7 @@
             {{pricelist_id.name}}
           </li>
         </ul>
-      </div>
+      </div-->
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
