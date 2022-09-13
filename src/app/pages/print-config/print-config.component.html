@@ -1,15 +1,17 @@
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item">
-    <a class="nav-link  active" id="config-tab" data-toggle="tab" href="#config" role="tab" aria-controls="config" aria-selected="true">Configuracion</a>
+    <a class="nav-link  active" id="config-tab" data-toggle="tab" href="#config" role="tab" aria-controls="config"
+      aria-selected="true">Configuracion</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" id="print-tab" data-toggle="tab" href="#print" role="tab" aria-controls="print" aria-selected="false">Impresoras</a>
+    <a class="nav-link" id="print-tab" data-toggle="tab" href="#print" role="tab" aria-controls="print"
+      aria-selected="false">Impresoras</a>
   </li>
 </ul>
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="config" role="tabpanel" aria-labelledby="config-tab">
     <form [formGroup]="configForm" (ngSubmit)="saveConfig()">
-      <div class="form-group" >
+      <div class="form-group">
         <label for="labelWidth">Metodo de scan</label>
         <select class="form-control" formControlName="scanMethod" #scanMethod>
           <option *ngFor="let method of scanMethods" [value]="method">
@@ -18,14 +20,16 @@
         </select>
       </div>
 
-      <div class="form-group" >
+      <div class="form-group">
         <label for="labelWidth">Ancho Etiqueta</label>
-        <input type="number" formControlName="labelWidth" class="form-control" id="labelWidth" aria-describedby="labelWidthHelp" placeholder="px">
+        <input type="number" formControlName="labelWidth" class="form-control" id="labelWidth"
+          aria-describedby="labelWidthHelp" placeholder="px">
         <small id="labelWidthHelp" class="form-text text-muted">Ancho en PX de la etiqueta.</small>
       </div>
-      <div class="form-group" >
+      <div class="form-group">
         <label for="labelHeight">Alto Etiqueta</label>
-        <input type="number" formControlName="labelHeight" class="form-control" id="labelHeight" aria-describedby="labelHeightHelp" placeholder="px">
+        <input type="number" formControlName="labelHeight" class="form-control" id="labelHeight"
+          aria-describedby="labelHeightHelp" placeholder="px">
         <small id="labelHeightHelp" class="form-text text-muted">Alto en PX de la etiqueta.</small>
       </div>
 
@@ -39,20 +43,23 @@
         <input type="checkbox" formControlName="showLog" class="form-check-input" id="showLog">
         <label class="form-check-label" for="showLog">Mostrar LOG</label>
       </div>
-      <div class="form-group" >
+      <div class="form-group">
         <label for="PrinterName">Impresora por defecto</label>
-        <input type="text" formControlName="PrinterName" class="form-control" id="PrinterName" aria-describedby="labelWidthHelp" placeholder="Nombre">
+        <input type="text" formControlName="PrinterName" class="form-control" id="PrinterName"
+          aria-describedby="labelWidthHelp" placeholder="Nombre">
         <small id="labelWidthHelp" class="form-text text-muted">Impresora a la que conecta automaticamente.</small>
       </div>
-      <div class="form-group" >
+      <div class="form-group">
         <label for="printAutoDelay">Delay de impresión</label>
-        <input type="number" formControlName="printAutoDelay" class="form-control" id="printAutoDelay" aria-describedby="printAutoDelayHelp" placeholder="milisegudos">
-        <small id="printAutoDelayHelp" class="form-text text-muted">Tiempo que tarda en milisegundos en imprimir automaticamente.</small>
+        <input type="number" formControlName="printAutoDelay" class="form-control" id="printAutoDelay"
+          aria-describedby="printAutoDelayHelp" placeholder="milisegudos">
+        <small id="printAutoDelayHelp" class="form-text text-muted">Tiempo que tarda en milisegundos en imprimir
+          automaticamente.</small>
       </div>
 
       <div class="form-group">
         <label for="priceChageDate" class="col-form-label">Cambio de precios</label>
-          <input class="form-control" type="text" [value]="priceChageDate" id="priceChageDate">
+        <input class="form-control" type="text" [value]="priceChageDate" id="priceChageDate">
       </div>
       <button type="submit" class="btn btn-login btn-lg">Guardar</button>
 
@@ -63,7 +70,8 @@
       <h2 class="col-12">
         {{ selected_printer }}
       </h2>
-      <button type="button" (click)="searchPrinters()" class="btn btn-primary btn-lg btn-block">Buscar Impresoras</button>
+      <button type="button" (click)="searchPrinters()" class="btn btn-primary btn-lg btn-block">Buscar
+        Impresoras</button>
     </div>
     <div class="row col-12">
       <ul class="list-group col-12">

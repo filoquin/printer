@@ -1,7 +1,17 @@
-<div  *ngIf="product"  [style.height.px]="ConfigService.params.labelHeight"  [style.width.px]="ConfigService.params.labelWidth"   style="background: #FFF; " [width]="ConfigService.params.labelWidth" [height]="ConfigService.params.labelHeight" class="etiqueta">
-  <div class="productName" style="text-align: center;"> {{product['display_name']}}</div>
-  <h1  class="productPrice" *ngIf="product.prices.length" style="text-align: center;background: #000; color: #FFF;">$ {{product['prices_dict'][2] | number : '1.0-0'}}</h1>
-  <div class="fee"><strong>12 cuotas de $ {{ product['prices_dict'][31] / 12 | number : '1.0-0'}} </strong>(${{ product['prices_dict'][31]  | number : '1.0-0'}})  </div>
-  <div class="productcodes">cod: {{product['default_code']}}</div>
+<div *ngIf="product" [style.height.px]="ConfigService.params.labelHeight"
+  [style.width.px]="ConfigService.params.labelWidth" style="background: #FFF; "
+  [width]="ConfigService.params.labelWidth" [height]="ConfigService.params.labelHeight" class="etiqueta">
+
+  <div style="text-align: center;">
+    <qr-code size="200"
+      [value]="'https://www.blancoamor.com/qr_price/' + product['product_tmpl_id'][0] +'-' + product['price_public']">
+    </qr-code>
+  </div>
+
+  <div class="productName" style="text-align: center; width:180px; left:50px; top:245px;padding: 5px;position: absolute;   transform: rotate(-90deg);
+  ">
+    {{product['default_code']}} {{product['display_name']}}</div>
+
+
 
 </div>

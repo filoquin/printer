@@ -26,6 +26,8 @@ import { OmniBarcodeComponent } from './main/elements/omni-barcode/omni-barcode.
 import { LeftPadFilterPipe } from './_helpers/left-pad-filter.pipe';
 import { PriceUpdateComponent } from './pages/price-update/price-update.component';
 import { FilterPricePipe } from './_helpers/filter-price.pipe';
+import { QRCodeModule } from 'angular2-qrcode';
+import { HomeComponent } from './pages/home/home.component';
 
 
 @NgModule({
@@ -42,7 +44,8 @@ import { FilterPricePipe } from './_helpers/filter-price.pipe';
     OmniBarcodeComponent,
     LeftPadFilterPipe,
     PriceUpdateComponent,
-    FilterPricePipe
+    FilterPricePipe,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +53,8 @@ import { FilterPricePipe } from './_helpers/filter-price.pipe';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    QRCodeModule
   ],
   providers: [HTTP, OdooRPCService],
   exports: [

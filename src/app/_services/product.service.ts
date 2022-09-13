@@ -10,12 +10,12 @@ export class ProductService {
 
   searchByCode(code) {
     const transaction$ = new Observable((observer) => {
-      const leaf = ["|", ["default_code", "=", code], ["ean13", "=", code]];
+      const leaf = ["|", ["default_code", "=", code], ["barcode", "=", code]];
       this.odooRPC
         .searchRead(
           "product.product",
           leaf,
-          ["name", "display_name", "default_code", "ean13", "description"],
+          ["name", "display_name", "default_code", "barcode", "description","product_tmpl_id",'price_public'],
           1,0,{"lang": "es_AR", 'display_default_code': false}
         )
         .then((res) => {
@@ -79,7 +79,7 @@ export class ProductService {
       this.odooRPC
         .searchRead(
           "product.pricelist",
-          [["type", "=", "sale"], ['currency_id.name', '=', 'ARS']],
+          [['currency_id.name', '=', 'ARS']],
           ["name"]
         )
         .then((res) => {
@@ -91,14 +91,14 @@ export class ProductService {
         });
     });
     return transaction$;
-  } 
+  }
   searchByTmplId(id) {
     const transaction$ = new Observable((observer) => {
       this.odooRPC
         .searchRead(
           "product.product",
           [['product_tmpl_id', '=', id]],
-          ["name", "display_name", "default_code", "description","barcode","modelo_articulo",'second_price'],
+          ["name", "display_name", "default_code", "description","barcode","product_tmpl_id",'price_public'],
           1,0,{"lang": "es_AR", 'display_default_code': false}
         )
         .then((res) => {

@@ -3,18 +3,7 @@
     <div [style.height.px]="ConfigService.params.labelHeight"  style="background: #eee; ">
       <app-price-label #etiqueta (click)="printTag()" [product]="product"></app-price-label>
     </div>
-    <div *ngIf="this.inputMethod == 'textBus'" class="text-center"><strong>{{textBus}}</strong></div>
-    <form [formGroup]="searchForm" *ngIf="this.inputMethod == 'form'">
-      <div class="input-group input-group-lg">
-        <input type="text" autofocus #search class="form-control" id="bus" formControlName="search" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
-        <span class="input-group-append">
-          <button class="btn btn-primary btn-lg" (click)="formSearch()" type="button">
-            <i class="fa fa-search"></i>
-          </button>
-        </span>
-      </div>
-    </form>
-  </div>
+    <app-omni-barcode (sendBarcode)="searchByCode($event);" [inputMethod]="inputMethod" ></app-omni-barcode>
 </div>
 <div class="text-center spinnerContent">
   <div class="spinner-grow text-warning" *ngIf="spinner" style="width: 5rem; height: 5rem;" role="status">

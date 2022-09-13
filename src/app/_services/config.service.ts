@@ -12,9 +12,9 @@ export class ConfigService {
     printAuto:false, 
     printAutoDelay:300,
     labelWidth:300,
-    labelHeight:250,
+    labelHeight:500,
     PrinterName: '',
-    priceChageDate:  "2021-06-24 00:00:00",
+    priceChageDate:  "2022-05-22 00:00:00",
 
   });
 

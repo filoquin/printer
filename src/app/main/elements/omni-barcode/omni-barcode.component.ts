@@ -207,8 +207,10 @@ export class OmniBarcodeComponent implements OnInit {
 		if (this.inputMethod != "textBus") {
 			return;
 		}
+    console.log(event.keyCode);
 		if (event.keyCode == 13) {
 			this.emitBarcode(this.textBus);
+      this.textBus = '';
 		} else {
 			this.textBus += event.key;
 			event.stopPropagation();
@@ -231,8 +233,12 @@ export class OmniBarcodeComponent implements OnInit {
     });
 
 	}
+  searchButton(){
+    this.emitBarcode(this.textBus);
+    this.textBus = '';
+  }
 	emitBarcode(code){
-
+        this.sendBarcode.emit(code); 
 	}
 	formSearch() {
     const search = this.searchForm.controls.search.value;

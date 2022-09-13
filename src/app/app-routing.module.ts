@@ -6,7 +6,8 @@ import { PrintLabelComponent } from "./pages/print-label/print-label.component";
 import { DasboardComponent } from "./main/dasboard/dasboard.component";
 import {AuthGuard} from "./_helpers/auth.guard";
 import { PriceUpdateComponent } from './pages/price-update/price-update.component';
-
+import { MenuComponent } from "./main/menu/menu.component";
+import { HomeComponent } from "./pages/home/home.component";
 const routes: Routes = [
 	{ path: "login", component: LoginComponent },
 	{
@@ -16,7 +17,7 @@ const routes: Routes = [
 		children: [
 
 			{ path: "user", component: LoginComponent ,canActivate: [AuthGuard]},
-			{ path: "", component: PrintLabelComponent ,canActivate: [AuthGuard]},
+			{ path: "", component: HomeComponent ,canActivate: [AuthGuard]},
 			{ path: "print-config", component: PrintConfigComponent ,canActivate: [AuthGuard]},
 			{ path: "label", component: PrintLabelComponent ,canActivate: [AuthGuard]},
 			{ path: "prices", component: PriceUpdateComponent ,canActivate: [AuthGuard]},

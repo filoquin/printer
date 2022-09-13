@@ -1,4 +1,6 @@
-    <div *ngIf="this.inputMethod == 'textBus'" class="text-center"><strong>{{textBus}}</strong></div>
+    <div *ngIf="this.inputMethod == 'textBus'" class="text-center bg-light"><strong>{{textBus}}</strong> 
+      <button type="button" *ngIf="textBus"  (click)="searchButton()" class="btn btn-outline-primary float-right">B</button>
+    </div>
     <form [formGroup]="searchForm" *ngIf="this.inputMethod == 'form'">
       <div class="input-group input-group-lg">
         <input type="text" autofocus #search class="form-control" id="bus" formControlName="search" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
